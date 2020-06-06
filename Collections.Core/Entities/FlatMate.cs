@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Collektions.Core.Entities
 {
-    class FlatMate : BaseEntity
+    public class FlatMate : BaseEntity
     {
+        public int? HouseId { get; private set; }
 
+        public string  Name { get; set; }
     }
 }

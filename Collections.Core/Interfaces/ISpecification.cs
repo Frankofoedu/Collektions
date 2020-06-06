@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Collektions.Core.Interfaces
 {
-    public interface ISpecification<T> where T : BaseEntity
+    public interface ISpecification<T> 
     {
         Expression<Func<T, bool>> Criteria { get; }
         List<Expression<Func<T, object>>> Includes { get; }
