@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Collektions.Core.Interfaces
 {
-    public interface IAsyncRepository<T> where T : BaseEntity
+    public interface IAsyncRepository<T> where T : BaseEntity, IAggregateRoot
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();

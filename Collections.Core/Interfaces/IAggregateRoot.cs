@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Collektions.Core.Entities
+namespace Collektions.Core.Interfaces
 {
-    class Expense : BaseEntity
+    public interface IAggregateRoot
     {
     }
 }

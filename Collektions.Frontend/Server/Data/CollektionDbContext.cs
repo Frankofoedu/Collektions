@@ -1,4 +1,5 @@
-﻿using Collektions.Frontend.Server.Models;
+﻿using Collektions.Core.Entities;
+using Collektions.Frontend.Server.Models;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +11,14 @@ using System.Threading.Tasks;
 
 namespace Collektions.Frontend.Server.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class CollektionDbContext : ApiAuthorizationDbContext<HouseMate>
     {
-        public ApplicationDbContext(
+        public CollektionDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        public DbSet<House> Houses { get; set; }
     }
 }

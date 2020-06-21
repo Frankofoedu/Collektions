@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Collektions.Infrastructure
 {
-    public class EfRepository<T> : IAsyncRepository<T> where T : BaseEntity
+    public class EfRepository<T> : IAsyncRepository<T> where T : BaseEntity, IAggregateRoot
     {
         public Task<T> AddAsync(T entity)
         {

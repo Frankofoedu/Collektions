@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Collektions.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Collektions.Core.Entities
 {
-    public class House : BaseEntity
+    public class House : BaseEntity, IAggregateRoot
     {
         [Required(ErrorMessage = "Please enter Name.")]
         [MaxLength(100)]

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Collektions.Core.Entities
 {
-    class Repayment : BaseEntity
+    public class Repayment : BaseEntity
     {
 
         [MaxLength(350)]

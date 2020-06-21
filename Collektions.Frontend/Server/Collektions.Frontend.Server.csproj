@@ -10,8 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Collections.Core\Collektions.Core.csproj" />
+    <ProjectReference Include="..\..\Collektions.Infrastructure\Collektions.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Collektions.ViewModels\Collektions.ViewModels.csproj" />
     <ProjectReference Include="..\Client\Collektions.Frontend.Client.csproj" />
-    <ProjectReference Include="..\Shared\Collektions.Frontend.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

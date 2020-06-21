@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Collektions.Core.Entities
 {
-    class Expenditure : BaseEntity
+    public class Expenditure : BaseEntity
     {
 
         [Required(ErrorMessage = "Please enter Name.")]
@@ -20,7 +20,7 @@ namespace Collektions.Core.Entities
         public Enumerations.RepaymentState RepaymentState { get; set; } = Enumerations.RepaymentState.Not_Paid;
 
         [ForeignKey("Spender")]
-        public int SpenderId { get; set; }
+        public string SpenderId { get; set; }
 
 
         public HouseMate Spender { get; set; }

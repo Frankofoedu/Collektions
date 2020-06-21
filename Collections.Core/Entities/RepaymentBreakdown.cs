@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Collektions.Core.Entities
 {
-    class RepaymentBreakdown : BaseEntity
+    public class RepaymentBreakdown : BaseEntity
     {
 
         public int Amount { get; set; }

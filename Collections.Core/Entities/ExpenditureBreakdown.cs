@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Collektions.Core.Entities
 {
-    class ExpenditureBreakdown : BaseEntity
+    public class ExpenditureBreakdown : BaseEntity
     {
 
         public int Amount { get; set; }

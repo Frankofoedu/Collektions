@@ -1,4 +1,5 @@
-﻿using Collektions.Core.Interfaces;
+﻿using Ardalis.Specification.QueryExtensions.Include;
+using Collektions.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

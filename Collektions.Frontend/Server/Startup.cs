@@ -13,6 +13,9 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Collektions.Frontend.Server.Data;
 using Collektions.Frontend.Server.Models;
+using Collektions.Core.Interfaces;
+using Collektions.Infrastructure;
+using Collektions.Core.Entities;
 
 namespace Collektions.Frontend.Server
 {
@@ -29,18 +32,20 @@ namespace Collektions.Frontend.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<CollektionDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("collektionConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<HouseMate>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<CollektionDbContext>();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                .AddApiAuthorization<HouseMate, CollektionDbContext>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
 
             services.AddControllersWithViews();
             services.AddRazorPages();

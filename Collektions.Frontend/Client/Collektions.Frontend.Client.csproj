@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Collektions.Frontend.Shared.csproj" />
+    <ProjectReference Include="..\..\Collektions.ViewModels\Collektions.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
