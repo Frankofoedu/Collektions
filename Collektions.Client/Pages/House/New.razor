@@ -1,10 +1,10 @@
 ﻿@page "/House/New"
 @using Collektions.ViewModels
-@inject HttpClient Http
+@inject IHttpClientFactory HttpClientFactory
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-4 col-sm-6 col-10">
+        <div class="col-lg-4 col-md-6 col-10">
             <EditForm Model="@house" OnValidSubmit="PostHouse">
                 <div class="card shadow rounded">
                     <div class="card-header">
@@ -50,18 +50,21 @@
     {
         try
         {
-            submitBtnText = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading...";
+            using (HttpClient Http = HttpClientFactory.CreateClient("GeneralClient"))
+            {
+                submitBtnText = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading...";
 
-            var uri = Http.BaseAddress.ToString();
+                var uri = Http.BaseAddress.ToString();
 
-            var newHTTP = new HttpClient();
-            newHTTP.BaseAddress = new Uri(uri);
+                var newHTTP = new HttpClient();
+                newHTTP.BaseAddress = new Uri(uri);
 
-            var rtn = await newHTTP.PostAsJsonAsync("api/house", house);
-            var rtnHouse = await rtn.Content.ReadFromJsonAsync<HouseVM>();
+                var rtn = await newHTTP.PostAsJsonAsync("api/house", house);
+                var rtnHouse = await rtn.Content.ReadFromJsonAsync<HouseVM>();
 
-            msg = $"House {rtnHouse.Name} was added successfully.";
-            submitBtnText = "Submit";
+                msg = $"House {rtnHouse.Name} was added successfully.";
+                submitBtnText = "Submit";
+            }
         }
         catch (Exception ex)
         {

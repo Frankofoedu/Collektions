@@ -14,7 +14,8 @@ namespace Collektions.Core.Entities
 
         [MaxLength(350)]
         public string Address { get; private set; }
-        private readonly List<HouseMate> _flatMates = new List<HouseMate>();
+
+        private readonly List<HouseMate> _houseMates = new List<HouseMate>();
 
         public House(string name, string address)
         {
@@ -23,7 +24,6 @@ namespace Collektions.Core.Entities
         }
 
        
-
-        public IReadOnlyCollection<HouseMate> HouseMates => _flatMates.AsReadOnly();
+        public IReadOnlyCollection<HouseMate> HouseMates => _houseMates.AsReadOnly();
     }
 }

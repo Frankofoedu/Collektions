@@ -12,7 +12,8 @@ namespace Collektions.Core.Entities
         public int Amount { get; set; }
         public int Remainder { get; set; }
 
-        public int HouseMateId { get; set; }
+        [MaxLength(200)]
+        public string HouseMateId { get; set; }
         public int ExpenditureId { get; set; }
 
         public Enumerations.RepaymentState RepaymentState { get; set; } = Enumerations.RepaymentState.Not_Paid;
