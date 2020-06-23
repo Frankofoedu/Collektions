@@ -1,5 +1,4 @@
 ﻿using Collektions.Core.Entities;
-using Collektions.Server.Models;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -20,5 +19,9 @@ namespace Collektions.Server.Data
         }
 
         public DbSet<House> Houses { get; set; }
+        public DbSet<Expenditure> Expenditures { get; set; }
+        public DbSet<ExpenditureBreakdown> ExpenditureBreakdowns { get; set; }
+        public DbSet<Repayment> Repayments { get; set; }
+        public DbSet<RepaymentBreakdown> RepaymentBreakdowns { get; set; }
     }
 }

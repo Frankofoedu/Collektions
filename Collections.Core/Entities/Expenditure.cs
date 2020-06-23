@@ -20,6 +20,7 @@ namespace Collektions.Core.Entities
         public Enumerations.RepaymentState RepaymentState { get; set; } = Enumerations.RepaymentState.Not_Paid;
 
         [ForeignKey("Spender")]
+        [MaxLength(200)]
         public string SpenderId { get; set; }
 
 

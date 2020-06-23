@@ -21,6 +21,8 @@ namespace Collektions.Client
             builder.Services.AddHttpClient("Collektions.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+            builder.Services.AddHttpClient("GeneralClient", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Collektions.ServerAPI"));
 

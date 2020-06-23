@@ -15,10 +15,12 @@ namespace Collektions.Core.Entities
         public int Amount { get; set; }
 
         [ForeignKey("Payer")]
-        public int PayerId { get; set; }
+        [MaxLength(200)]
+        public string PayerId { get; set; }
 
         [ForeignKey("Receiver")]
-        public int ReceiverId { get; set; }
+        [MaxLength(200)]
+        public string ReceiverId { get; set; }
 
         public Enumerations.RepaymentState RepaymentState { get; set; } = Enumerations.RepaymentState.Not_Paid;
 
