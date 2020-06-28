@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200628221329_notification.cs" />
+    <Compile Remove="Migrations\20200628221329_notification.Designer.cs" />
+    <Compile Remove="Migrations\20200628221716_notification.cs" />
+    <Compile Remove="Migrations\20200628221716_notification.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />

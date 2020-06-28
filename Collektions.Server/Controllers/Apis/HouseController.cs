@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Collektions.Web.Controllers.Apis
 {
-    [AllowAnonymous]
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class HouseController : BaseApiController
@@ -21,16 +21,36 @@ namespace Collektions.Web.Controllers.Apis
             _houseRepository = houseRepository;
         }
 
-        [HttpGet("GetHouseById")]
-        public async Task<House> GetAsync(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
         {
-            return await _houseRepository.GetByIdAsync(id);
+            //TODO: Get house for current logged in user
+            await Task.Delay(5000);
+            //return Ok(new HouseVM() { Name="Somolu House", Address="Ladi-Lak, Bariga." });
+            return Ok(null);
         }
 
         [HttpPost]
-        public HouseVM Post(HouseVM house)
+        public IActionResult Post(HouseVM house)
         {
-            return house;
+            //TODO: implement post house to database.
+            return Ok(house);
+        }
+
+        [HttpPost("RequestJoin")]
+        public async Task<IActionResult> PostRequestJoinAsync(string adminEmail)
+        {
+            //TODO: implement create notification for receiver = housemate(adminEmail) and sender=housemate(current User)
+            await Task.Delay(5000);
+            return Ok("Notification sent to admin of Somolu House.");
+        }
+
+        [HttpGet("ReplyJoin/{notificationId}/{reply}")]
+        public async Task<IActionResult> PostReplyJoinAsync(int notificationId, int reply)
+        {
+            //TODO: implement reply join house request. reply is either 1=yes or 0=no
+            await Task.Delay(5000);
+            return Ok("User was added to house successfully.");
         }
     }
 }

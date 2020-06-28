@@ -39,6 +39,12 @@
                 </div>
                 <div class="card-footer text-center">
                     <button type="submit" class="btn btn-primary">Register</button>
+
+                    <div class="form-group">
+                        <p>
+                            <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account?</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </form>

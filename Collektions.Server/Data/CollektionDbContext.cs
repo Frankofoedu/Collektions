@@ -23,5 +23,6 @@ namespace Collektions.Server.Data
         public DbSet<ExpenditureBreakdown> ExpenditureBreakdowns { get; set; }
         public DbSet<Repayment> Repayments { get; set; }
         public DbSet<RepaymentBreakdown> RepaymentBreakdowns { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }
