@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Collektions.Core.Entities
@@ -14,6 +15,8 @@ namespace Collektions.Core.Entities
 
         [MaxLength(350)]
         public string Address { get; private set; }
+
+
 
         private readonly List<HouseMate> _houseMates = new List<HouseMate>();
 

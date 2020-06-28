@@ -14,6 +14,7 @@ namespace Collektions.Core.Entities
         [Required(ErrorMessage ="Please enter Name.")]
         [MaxLength(100, ErrorMessage ="Name should not be more than 100 characters.")]
         public string Name { get; set; }
+        public bool IsAdmin { get; set; }
 
 
         public int? HouseId { get; set; }
