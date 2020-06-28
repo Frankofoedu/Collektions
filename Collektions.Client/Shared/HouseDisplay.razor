@@ -1,0 +1,34 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="card w-100 rounded shadow-sm">
+            @if (!string.IsNullOrWhiteSpace(House.Name))
+            {
+                <div class="card-header">
+                    <h4>@House.Name</h4>
+                </div>
+                <div class="card-body">
+                    <p>@House.Address</p>
+                </div>
+            }
+            else
+            {
+                <div class="card-header">
+                    <h4>Not Found!</h4>
+                </div>
+                <div class="card-body">
+                    <p>Don't belong to a house yet?</p>
+                    <div class="form-group">
+                        <a href="/House/New" class="btn btn-primary rounded"> Create House </a>
+                        <a href="#" class="btn btn-link"> Request to Join House </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    // Demonstrates how a parent component can supply parameters
+    [Parameter]
+    public Collektions.ViewModels.HouseVM House { get; set; }
+}

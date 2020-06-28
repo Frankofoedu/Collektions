@@ -1,7 +1,81 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Collektions.ViewModels
+@inject IHttpClientFactory HttpClientFactory
+@inject IToastService toastService
 
-<h1>Hello, world!</h1>
+@inject AuthenticationStateProvider AuthProvider
 
-Welcome to your new app.
+<Jumbotron Header="Home" Subheader="Welcome to Collektor." />
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="container">
+    <div class="row">
+        <p>
+            <b>Collektor</b> helps you track and manage expenses and reimbursements between flatmates.
+        </p>
+    </div>
+
+    <AuthorizeView>
+        <NotAuthorized>
+            <div class="row">
+                <p class="p-3">
+                    <a href="authentication/register" class="btn btn-primary rounded"> JOIN US NOW </a>
+                    or <a href="authentication/login" class="btn btn-link"> Sign In </a> if you already have an account.
+                </p>
+            </div>
+        </NotAuthorized>
+        <Authorized>
+            <div class="row">
+                @((MarkupString)preHouseDisplay)
+                @if (displayHouse)
+                {
+                    <HouseDisplay House="house"/>
+                }
+            </div>
+        </Authorized>
+    </AuthorizeView>
+
+</div>
+
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+    private string preHouseDisplay = "<p class='p-3'><span class='spinner-grow' role='status'></span> Getting your house info...</p>";
+    private HouseVM house = new HouseVM();
+    private bool displayHouse = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationState;
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            try
+            {
+                using (HttpClient Http = HttpClientFactory.CreateClient("Collektions.ServerAPI"))
+                {
+                    var rtn = await Http.GetAsync("api/house");
+                    if (rtn.IsSuccessStatusCode)
+                    {
+                        if (!string.IsNullOrWhiteSpace(await rtn.Content.ReadAsStringAsync()))
+                        {
+                            house = await rtn.Content.ReadFromJsonAsync<HouseVM>();
+                        }
+                        else { house = new HouseVM(); }
+                    }
+                    else { house = new HouseVM(); }
+
+                    preHouseDisplay = "";
+                    displayHouse = true;
+                }
+            }
+            catch (Exception)
+            {
+                toastService.ShowError($"Alas! We too are not above mistakes.", "An Error Occured.");
+            }
+        }
+    }
+
+}

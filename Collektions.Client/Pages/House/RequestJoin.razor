@@ -1,0 +1,57 @@
+﻿@page "/House/RequestJoin"
+@using Microsoft.AspNetCore.Authorization
+@inject IHttpClientFactory HttpClientFactory
+@inject IToastService toastService
+
+@attribute [Authorize]
+<Jumbotron Header="Request to Join House" />
+<FormContainer Header="Enter the email of your house's admin.">
+    <EditForm Model="@AdminEmail" OnValidSubmit="PostEmail">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label>Email</label>
+            <InputText @bind-Value="AdminEmail" class="form-control" />
+        </div>
+        <div class="form-group text-center">
+            <button class="btn btn-primary" type="submit">@((MarkupString)submitBtnText)</button>
+        </div>
+    </EditForm>
+</FormContainer>
+
+
+@code {
+    [System.ComponentModel.DataAnnotations.EmailAddress]
+    [System.ComponentModel.DataAnnotations.Required]
+    private string AdminEmail { get; set; }
+
+    private string submitBtnText = "Submit";
+
+    private async Task PostEmail()
+    {
+        try
+        {
+            using (HttpClient Http = HttpClientFactory.CreateClient("Collektions.ServerAPI"))
+            {
+                submitBtnText = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading...";
+
+                var rtn = await Http.PostAsJsonAsync("api/house/RequestJoin", AdminEmail);
+                var rtnMessage = await rtn.Content.ReadAsStringAsync();
+                if (rtn.IsSuccessStatusCode)
+                {
+                    toastService.ShowSuccess(rtnMessage, "Success");
+                }
+                else toastService.ShowError(rtnMessage, "Error!");
+
+                submitBtnText = "Submit";
+            }
+        }
+        catch (Exception)
+        {
+            toastService.ShowError($"Alas! We too are not above mistakes.", "An Error Occured.");
+            //err = ex.ToString();
+        }
+    }
+}
